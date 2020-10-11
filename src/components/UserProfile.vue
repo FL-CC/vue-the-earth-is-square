@@ -3,8 +3,8 @@
     <h1 class="up_title">@{{ user.username }}</h1>
     <div class="up_badge">Admin</div>
     <div class="up_section">
-      <span class="up_name">{{ fullName }}</span>
-      <span class="up_followers">{{ followers }}</span>
+      <span class="up_name">{{ user.name }}</span>
+      <span class="up_followers">{{ user.follower }}</span>
       <button @click="followUser">Follow</button>
     </div>
   </div>
@@ -13,19 +13,25 @@
 <script>
 export default {
   name: "UserProfile",
-  data() {
-    return {
-      followers: 0,
-      user: {
-        id: 1,
-        username: "Twilli",
-        firstName: "Fili",
-        lastName: "Catos",
-        email: "fl@catos.de",
-        isAdmin: true,
-      },
-    };
+  props: {
+    user: {
+      required: true,
+      type: Object,
+    },
   },
+  // data() {
+  //   return {
+  //     followers: 0,
+  //     user: {
+  //       id: 1,
+  //       username: "Twilli",
+  //       firstName: "Fili",
+  //       lastName: "Catos",
+  //       email: "fl@catos.de",
+  //       isAdmin: true,
+  //     },
+  //   };
+  // },
   watch: {
     followers(newFollowerCount, oldFollowerCount) {
       if (oldFollowerCount < newFollowerCount) {
@@ -60,12 +66,13 @@ export default {
   flex-direction: column;
   justify-content: flex-start;
   text-align: left;
-  margin: 20px;
   width: 300px;
   border-radius: 3px;
   box-shadow: 10px 11px 14px -9px rgba(0, 0, 0, 0.32);
   background-color: white;
   padding: 8px;
+  justify-self: self-start;
+  align-self: flex-start;
 }
 
 .up_section {
@@ -84,6 +91,7 @@ export default {
   font-weight: bolder;
   padding: 4px;
   border-radius: 5px;
+
   background-color: purple;
   color: white;
   margin-right: auto;
@@ -92,13 +100,17 @@ export default {
 }
 
 .up_followers {
-  border-radius: 11px;
-  background-color: darkred;
+  border-radius: 20px;
+  border-width: 3px;
+  border-color: #454545;
+  border-style: solid;
+  background-color: darkcyan;
   color: white;
   width: 22px;
   display: flex;
   justify-content: space-around;
   align-content: space-around;
   padding-top: 2px;
+  font-weight: bold;
 }
 </style>
