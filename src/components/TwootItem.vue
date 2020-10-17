@@ -16,10 +16,6 @@
 export default {
   name: "TwootItem",
   props: {
-    user: {
-      required: true,
-      type: Object,
-    },
     twoot: {
       required: true,
       type: Object,
@@ -33,15 +29,13 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 .tw_container {
+  @include container;
+
   text-align: left;
   min-height: 40px;
-  padding: 8px;
-  background-color: white;
-  border-radius: 5px;
   margin-bottom: 12px;
-  box-shadow: 10px 11px 14px -9px rgba(0, 0, 0, 0.32);
   transition-duration: 0.15s;
   transition-timing-function: ease;
   transition-property: all;
@@ -59,25 +53,26 @@ export default {
   justify-content: space-between;
 }
 
-.tw_headertitle > h3 {
-  margin: 0;
+.tw_content {
+  font-size: $f-size4;
+  color: $fc-dark3;
 }
 
-.tw_container {
-  color: #847985;
+.tw_headertitle > h3 {
+  margin: 0;
 }
 
 h3 {
   font-weight: bold;
   margin: 0;
-  font-size: 15px;
-  color: #626758;
+  font-size: $f-size5;
+  color: $fc-dark2;
 }
 
 h4 {
   margin: 0;
   font-weight: bold;
-  font-size: 13px;
-  color: #626758;
+  font-size: $f-size3;
+  color: $fc-dark1;
 }
 </style>

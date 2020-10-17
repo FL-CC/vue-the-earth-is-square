@@ -1,4 +1,9 @@
 <template>
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Volkhov"
+  />
+
   <div class="app_layout">
     <div class="app_header">
       <div class="app_logo"></div>
@@ -87,8 +92,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import "@/styles/global.scss";
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -102,10 +107,10 @@ export default {
     justify-items: stretch;
     justify-self: stretch;
     align-self: stretch;
-    background-color: #e5e2e9;
+    background-color: $accent;
 
     .app_content {
-      padding: 8px;
+      padding: $p-2;
       grid-column: 2;
       grid-row: 2 / 3;
       align-self: stretch;
@@ -122,24 +127,24 @@ export default {
           align-items: stretch;
           flex: 1 1 400;
           justify-content: stretch;
-          padding-left: 50px;
-          padding-right: 50px;
+          padding-left: $p-3;
+          padding-right: $p-3;
           width: 100%;
         }
       }
     }
     .app_header {
+      @include colors-primary;
+
       grid-column: 1 / span 2;
       grid-row: 1 / 2;
-      color: #2c3e50;
-
       display: flex;
       justify-content: space-evenly;
       align-items: center;
 
       .app_title {
-        font-size: 48px;
-        font-family: "Comic sans MS";
+        font-size: $f-size1;
+        font-family: $comic-font-family;
       }
     }
     .app_footer {

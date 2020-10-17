@@ -1,0 +1,52 @@
+@import "colors";
+@import "fonts";
+
+$p-1: 3px;
+$p-2: 8px;
+$p-3: 20px;
+
+$m-1: 3px;
+$m-2: 8px;
+$m-3: 20px;
+
+$br-1: 3px;
+$br-2: 6px;
+$br-3: 15px;
+
+$bs-1: 1px;
+$bs-2: 3px;
+$bs-3: 5px;
+
+@mixin shadow {
+  box-shadow: 10px 11px 14px -9px rgba(0, 0, 0, 0.32);
+}
+
+@mixin container {
+  @include shadow;
+  padding: $p-2;
+  background-color: $white;
+  border-radius: $br-2;
+}
+
+@mixin button {
+  @include colors-secondary;
+  border-radius: $br-2;
+  border: 0;
+  padding: $p-2;
+}
+
+.btn {
+  @include button;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &.danger {
+    @include colors-danger;
+    cursor: not-allowed;
+  }
+}
+.container {
+  @include container;
+}

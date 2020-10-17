@@ -1,0 +1,19 @@
+$primary: rgb(255, 4, 87);
+$secondary: deepskyblue;
+$accent: #e5e2e9;
+$white: white;
+
+@mixin colors-primary {
+  background-color: $primary;
+  color: $white;
+}
+
+@mixin colors-secondary {
+  background-color: $secondary;
+  color: $white;
+}
+
+@mixin colors-danger {
+  background-color: $primary;
+  color: $white;
+}

@@ -1,4 +1,9 @@
+@import "colors";
+@import "layout";
+@import "fonts";
+
 body {
   margin: 0;
   height: 100vh;
+  font-family: $default-font-family;
 }

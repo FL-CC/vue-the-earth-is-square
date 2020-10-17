@@ -1,13 +1,13 @@
 <template>
-  <div class="up_container">
-    <h1 class="up_title">@{{ user.username }}</h1>
-    <div class="up_badge">Admin</div>
-    <div class="up_section">
-      <span class="up_name">{{ user.name }}</span>
-      <span class="up_followers">{{ user.follower }}</span>
-      <button @click="followUser">Follow</button>
+  <div class="up_outer">
+    <div class="up_container">
+      <h1 class="up_title">@{{ user.username }}</h1>
+      <div class="up_badge">Admin</div>
+      <div class="up_section">
+        <span class="up_name">{{ user.name }}</span>
+      </div>
     </div>
-    <div class="up_newTwoot">
+    <div class="up_newTwoot container">
       <form
         class="up_newTweetForm"
         @submit.prevent="createTwoot"
@@ -23,7 +23,13 @@
             {{ type.name }}
           </option>
         </select>
-        <button type="submit">Twoot</button>
+        <button
+          class="btn"
+          :class="{ danger: newTwootCharCount > 180 }"
+          type="submit"
+        >
+          Twoot
+        </button>
       </form>
     </div>
   </div>
@@ -67,9 +73,6 @@ export default {
     },
   },
   methods: {
-    followUser() {
-      this.followers++;
-    },
     createTwoot() {
       if (this.newTwootContent && this.newTwootType != "draft") {
         this.$emit("create-twoot", this.newTwootContent, this.user);
@@ -78,81 +81,90 @@ export default {
     },
   },
   mounted() {
-    setTimeout(() => {
-      this.followUser();
-    }, 1000);
+    // setTimeout(() => {
+    //   this.followUser();
+    // }, 1000);
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.up_container {
+.up_outer {
   display: flex;
+  flex-direction: column;
   flex: 1 0 300px;
+}
+
+.up_container {
+  @include container;
+
+  display: flex;
   flex-direction: column;
   justify-content: flex-start;
   text-align: left;
-  width: 300px;
-  border-radius: 3px;
-  box-shadow: 10px 11px 14px -9px rgba(0, 0, 0, 0.32);
-  background-color: white;
-  padding: 8px;
   justify-self: self-start;
-  align-self: flex-start;
 
   .up_title {
-    font-size: 16px;
-    margin-bottom: 8px;
-    margin-top: 4px;
+    font-size: $f-size3;
+    margin-bottom: $m-2;
+    margin-top: $m-1;
   }
 
   .up_badge {
-    font-size: 10px;
+    font-size: $f-size5;
     font-weight: bolder;
-    padding: 4px;
-    border-radius: 5px;
+    padding: $p-1;
+    border-radius: $br-1;
 
-    background-color: purple;
-    color: white;
+    background-color: $primary;
+    color: $white;
     margin-right: auto;
     margin-top: 0;
-    margin-bottom: 16px;
+    margin-bottom: $m-3;
   }
 
   .up_section {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-
-    .up_followers {
-      border-radius: 20px;
-      border-width: 3px;
-      border-color: #454545;
-      border-style: solid;
-      background-color: darkcyan;
-      color: white;
-      width: 22px;
-      display: flex;
-      justify-content: space-around;
-      align-content: space-around;
-      padding-top: 2px;
-      font-weight: bold;
-    }
   }
+}
+.up_newTwoot {
+  display: flex;
+  flex-direction: column;
+  margin-top: $m-3;
+  font-family: $default-font-family;
+  color: $fc-dark1;
 
-  .up_newTwoot {
+  .up_newTweetForm {
     display: flex;
     flex-direction: column;
-    padding: 20px 8px 8px 8px;
+    align-items: flex-start;
+    justify-content: space-between;
 
-    .up_newTweetForm {
-      display: flex;
-      flex-direction: column;
+    textarea#newTwoot {
+      margin-top: $m-2 !important;
+      border: 2px solid $accent;
+      padding: $p-2;
+      align-self: stretch;
+    }
 
-      &.limit {
-        border: 2px solid red;
-        border-radius: 2px;
+    label {
+      margin-top: $m-3;
+    }
+
+    select {
+      @include button;
+      margin: $m-2 0;
+      padding: $p-1;
+
+      option {
+        background-color: $primary;
       }
+    }
+
+    button {
+      align-self: stretch;
     }
   }
 }
