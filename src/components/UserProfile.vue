@@ -7,6 +7,19 @@
       <span class="up_followers">{{ user.follower }}</span>
       <button @click="followUser">Follow</button>
     </div>
+    <div class="up_newTwoot">
+      <form class="up_newTweetForm" @submit.prevent="createTwoot">
+        <label for="newTwoot"><strong>New Twoot</strong></label>
+        <textarea id="newTwoot" rows="4" v-model="newTwootContent" />
+        <label for="twootType"><strong>Type :</strong></label>
+        <select id="twootType" v-model="newTwootType">
+          <option v-for="type in twootTypes" :value="type.value" :key="type.id">
+            {{ type.name }}
+          </option>
+        </select>
+        <button type="submit">Twoot</button>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -19,19 +32,16 @@ export default {
       type: Object,
     },
   },
-  // data() {
-  //   return {
-  //     followers: 0,
-  //     user: {
-  //       id: 1,
-  //       username: "Twilli",
-  //       firstName: "Fili",
-  //       lastName: "Catos",
-  //       email: "fl@catos.de",
-  //       isAdmin: true,
-  //     },
-  //   };
-  // },
+  data() {
+    return {
+      newTwootType: "instant",
+      newTwootContent: "",
+      twootTypes: [
+        { id: 1, value: "draft", name: "Draft" },
+        { id: 2, value: "instant", name: "Instant Twoot" },
+      ],
+    };
+  },
   watch: {
     followers(newFollowerCount, oldFollowerCount) {
       if (oldFollowerCount < newFollowerCount) {
@@ -51,6 +61,11 @@ export default {
     followUser() {
       this.followers++;
     },
+    createTwoot() {
+      if (this.newTwootContent && this.newTwootType != "draft") {
+        this.$emit("create-twoot", this.newTwootContent, this.user);
+      }
+    },
   },
   mounted() {
     setTimeout(() => {
@@ -63,6 +78,7 @@ export default {
 <style>
 .up_container {
   display: flex;
+  flex: 1 0 300px;
   flex-direction: column;
   justify-content: flex-start;
   text-align: left;
@@ -112,5 +128,16 @@ export default {
   align-content: space-around;
   padding-top: 2px;
   font-weight: bold;
+}
+
+.up_newTwoot {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 8px 8px 8px;
+}
+
+.up_newTweetForm {
+  display: flex;
+  flex-direction: column;
 }
 </style>
