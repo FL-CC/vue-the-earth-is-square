@@ -8,8 +8,14 @@
       <button @click="followUser">Follow</button>
     </div>
     <div class="up_newTwoot">
-      <form class="up_newTweetForm" @submit.prevent="createTwoot">
-        <label for="newTwoot"><strong>New Twoot</strong></label>
+      <form
+        class="up_newTweetForm"
+        @submit.prevent="createTwoot"
+        :class="{ limit: newTwootCharCount > 180 }"
+      >
+        <label for="newTwoot"
+          ><strong>New Twoot ({{ newTwootCharCount }} / 180 )</strong></label
+        >
         <textarea id="newTwoot" rows="4" v-model="newTwootContent" />
         <label for="twootType"><strong>Type :</strong></label>
         <select id="twootType" v-model="newTwootType">
@@ -56,6 +62,9 @@ export default {
     fullName() {
       return `${this.user.lastName}, ${this.user.firstName}`;
     },
+    newTwootCharCount() {
+      return this.newTwootContent.length;
+    },
   },
   methods: {
     followUser() {
@@ -65,6 +74,7 @@ export default {
       if (this.newTwootContent && this.newTwootType != "draft") {
         this.$emit("create-twoot", this.newTwootContent, this.user);
       }
+      this.newTwootContent = "";
     },
   },
   mounted() {
@@ -75,7 +85,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 .up_container {
   display: flex;
   flex: 1 0 300px;
@@ -89,55 +99,61 @@ export default {
   padding: 8px;
   justify-self: self-start;
   align-self: flex-start;
-}
 
-.up_section {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
-.up_title {
-  font-size: 16px;
-  margin-bottom: 8px;
-  margin-top: 4px;
-}
+  .up_title {
+    font-size: 16px;
+    margin-bottom: 8px;
+    margin-top: 4px;
+  }
 
-.up_badge {
-  font-size: 10px;
-  font-weight: bolder;
-  padding: 4px;
-  border-radius: 5px;
+  .up_badge {
+    font-size: 10px;
+    font-weight: bolder;
+    padding: 4px;
+    border-radius: 5px;
 
-  background-color: purple;
-  color: white;
-  margin-right: auto;
-  margin-top: 0;
-  margin-bottom: 16px;
-}
+    background-color: purple;
+    color: white;
+    margin-right: auto;
+    margin-top: 0;
+    margin-bottom: 16px;
+  }
 
-.up_followers {
-  border-radius: 20px;
-  border-width: 3px;
-  border-color: #454545;
-  border-style: solid;
-  background-color: darkcyan;
-  color: white;
-  width: 22px;
-  display: flex;
-  justify-content: space-around;
-  align-content: space-around;
-  padding-top: 2px;
-  font-weight: bold;
-}
+  .up_section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 
-.up_newTwoot {
-  display: flex;
-  flex-direction: column;
-  padding: 20px 8px 8px 8px;
-}
+    .up_followers {
+      border-radius: 20px;
+      border-width: 3px;
+      border-color: #454545;
+      border-style: solid;
+      background-color: darkcyan;
+      color: white;
+      width: 22px;
+      display: flex;
+      justify-content: space-around;
+      align-content: space-around;
+      padding-top: 2px;
+      font-weight: bold;
+    }
+  }
 
-.up_newTweetForm {
-  display: flex;
-  flex-direction: column;
+  .up_newTwoot {
+    display: flex;
+    flex-direction: column;
+    padding: 20px 8px 8px 8px;
+
+    .up_newTweetForm {
+      display: flex;
+      flex-direction: column;
+
+      &.limit {
+        border: 2px solid red;
+        border-radius: 2px;
+      }
+    }
+  }
 }
 </style>

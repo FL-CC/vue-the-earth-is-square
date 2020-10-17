@@ -36,19 +36,19 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
 .sb_container {
   padding: 16px 20px;
-}
 
-.sb_content {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-}
+  .sb_content {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
 
-.sb_item {
-  margin-bottom: 8px;
+    .sb_item {
+      margin-bottom: 8px;
+    }
+  }
 }
 </style>

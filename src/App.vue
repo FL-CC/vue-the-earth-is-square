@@ -86,81 +86,71 @@ export default {
 };
 </script>
 
-<style>
-html,
-body {
-  height: 100%;
-  margin: 0;
-}
-
+<style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   height: 100%;
-}
 
-.app_twootContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  flex: 1 1 400;
-  justify-content: stretch;
-  padding-left: 50px;
-  padding-right: 50px;
-  width: 100%;
-}
-.app_section {
-  display: flex;
-  justify-content: stretch;
-  width: 100%;
-}
+  .app_layout {
+    display: grid;
+    grid-template-columns: 1fr 7fr;
+    grid-template-rows: 100px 10fr 20px;
+    height: 100%;
+    justify-items: stretch;
+    justify-self: stretch;
+    align-self: stretch;
+    background-color: #e5e2e9;
 
-.app_layout {
-  display: grid;
+    .app_content {
+      padding: 8px;
+      grid-column: 2;
+      grid-row: 2 / 3;
+      align-self: stretch;
+      justify-self: stretch;
 
-  grid-template-columns: 1fr 7fr;
-  grid-template-rows: 100px 10fr 20px;
+      .app_section {
+        display: flex;
+        justify-content: stretch;
+        width: 100%;
 
-  height: 100%;
-  justify-items: stretch;
-  justify-self: stretch;
-  align-self: stretch;
+        .app_twootContainer {
+          display: flex;
+          flex-direction: column;
+          align-items: stretch;
+          flex: 1 1 400;
+          justify-content: stretch;
+          padding-left: 50px;
+          padding-right: 50px;
+          width: 100%;
+        }
+      }
+    }
+    .app_header {
+      grid-column: 1 / span 2;
+      grid-row: 1 / 2;
+      color: #2c3e50;
 
-  background-color: #e5e2e9;
-}
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
 
-.app_content {
-  padding: 8px;
+      .app_title {
+        font-size: 48px;
+        font-family: "Comic sans MS";
+      }
+    }
+    .app_footer {
+      grid-column: 1 / span 2;
+      grid-row: 3 / 4;
+    }
 
-  grid-column: 2;
-  grid-row: 2 / 3;
-  align-self: stretch;
-  justify-self: stretch;
-}
-.app_header {
-  grid-column: 1 / span 2;
-  grid-row: 1 / 2;
-  color: #2c3e50;
-
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-}
-
-.app_sidebar {
-  grid-column: 1 / span 1;
-  grid-row: 2 / 3;
-}
-
-.app_footer {
-  grid-column: 1 / span 2;
-  grid-row: 3 / 4;
-}
-
-.app_title {
-  font-size: 48px;
-  font-family: "Comic sans MS";
+    .app_sidebar {
+      grid-column: 1 / span 1;
+      grid-row: 2 / 3;
+    }
+  }
 }
 </style>
