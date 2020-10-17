@@ -143,14 +143,16 @@ export default {
     justify-content: space-between;
 
     textarea#newTwoot {
-      margin-top: $m-2 !important;
+      margin-top: $m-1;
+      margin-bottom: $m-3;
       border: 2px solid $accent;
       padding: $p-2;
       align-self: stretch;
     }
 
     label {
-      margin-top: $m-3;
+      margin-top: $m-1;
+      margin-bottom: $m-1;
     }
 
     select {
