@@ -14,6 +14,8 @@
       <SideBar />
     </div>
     <div class="app_content">
+      <router-view />
+
       <div class="app_section">
         <UserProfile :user="user" @create-twoot="createTwoot" />
         <div class="app_twootContainer">
